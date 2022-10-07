@@ -85,7 +85,7 @@ You must set the DSN url in production.
     https://words.filippo.io/mkcert-valid-https-certificates-for-localhost/
 
     $ mkcert -install
-    $ mkcert -key-file study.local.key -cert-file study.local.crt localhost 127.0.0.1 ::1 172.19.0.1 study.local
+    $ mkcert -key-file study.local.key -cert-file study.local.crt localhost 127.0.0.1 ::1 study.local
 
     hosts file: 127.0.0.1 .study.local
 
