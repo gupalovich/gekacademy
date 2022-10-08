@@ -1,8 +1,6 @@
 import pytest
-import logging
 
 from transliterate import translit
-from django.test import TestCase
 from django.utils.text import slugify
 
 from study.lessons.models import Course
@@ -19,7 +17,6 @@ def model_slug_test_generator(cls, test_slug: str, create=5) -> None:
         slug = get_unique_slug(cls, test_slug)
         obj = cls.objects.create(title=test_slug, slug=slug)
         res_slug = f'{slugify(test_slug)}-{i}' if i > 0 else slugify(test_slug)
-        logging.info(res_slug)
         assert '@' not in res_slug
         assert obj.slug == res_slug
 
