@@ -307,8 +307,13 @@ SOCIALACCOUNT_PROVIDERS = {
         'LOCALE_FUNC': lambda request: 'en_US',
         'VERSION': 'v2.4',
     },
-    'google': {},
-    'vk': {}
+    'google': {
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+    },
+    'vk': {
+        'VERIFIED_EMAIL': True,
+    }
 }
 
 # django-rest-framework
