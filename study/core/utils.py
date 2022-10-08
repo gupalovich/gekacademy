@@ -1,11 +1,12 @@
 import re
 
+from transliterate import translit
 from django.utils.text import slugify
 
 
-def get_unique_slug(cls, name: str) -> str:
-    """TODO: add support for other unicodes (ru)"""
-    slug = slugify(name)
+def get_unique_slug(cls, title: str) -> str:
+    title = translit(title, 'ru', reversed=True)  # fix ru unicode titles
+    slug = slugify(title)
     unique_slug = slug
     num = 1
     while cls.objects.filter(slug=unique_slug).exists():
