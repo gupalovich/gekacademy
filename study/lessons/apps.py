@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 class LessonsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'lessons.core'
+    name = 'study.lessons'
     verbose_name = _("Lessons")
 
     def ready(self):
