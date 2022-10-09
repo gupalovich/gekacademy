@@ -15,11 +15,20 @@ class CourseFactory(DjangoModelFactory):
 
 
 class LessonFactory(DjangoModelFactory):
+    course = SubFactory(CourseFactory)
     title = Faker('name', locale='ru_RU')
     theory = Faker('name')
     status = FuzzyChoice(choices=['draft', 'published'])
-    course = SubFactory(CourseFactory)
 
     class Meta:
         model = Lesson
         django_get_or_create = ['title']
+
+
+class ExerciseFactory(DjangoModelFactory):
+    lesson = SubFactory(LessonFactory)
+    difficulty = FuzzyChoice(choices=[i for i in range(10)])
+
+    class Meta:
+        model = Exercise
+        # django_get_or_create = ['title']

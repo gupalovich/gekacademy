@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.utils.text import slugify
 
 from ..models import Course, Lesson, Exercise
-from .factories import CourseFactory, LessonFactory
+from .factories import CourseFactory, LessonFactory, ExerciseFactory
 
 
 class CourseTests(TestCase):
@@ -33,6 +33,7 @@ class CourseTests(TestCase):
 
     def test_fields(self):
         for obj in self.courses:
+            assert obj.uuid
             assert len(obj.title) >= 5
             assert slugify(translit(obj.title, 'ru', reversed=True)) == obj.slug
             assert obj.status == 'draft' or obj.status == 'published'
@@ -61,12 +62,50 @@ class LessonTests(TestCase):
     def test_delete(self):
         for obj in self.lessons:
             obj.delete()
+        courses = Course.objects.all()
         lessons = Lesson.objects.all()
+        assert len(courses) == self.batch_size
         assert not len(lessons)
 
     def test_fields(self):
         for obj in self.lessons:
+            assert obj.uuid
+            assert obj.course.uuid
             assert len(obj.title) >= 5
             assert len(obj.theory) >= 5
             assert slugify(translit(obj.title, 'ru', reversed=True)) == obj.slug
             assert obj.status == 'draft' or obj.status == 'published'
+
+
+class ExerciseTests(TestCase):
+    def setUp(self):
+        self.batch_size = 10
+        self.exercises = ExerciseFactory.create_batch(size=self.batch_size)
+
+    def test_create(self):
+        assert len(self.exercises) == self.batch_size
+
+    def test_update(self):
+        new_difficulty = 11
+        for obj in self.exercises:
+            obj.difficulty = new_difficulty
+            obj.save()
+        for obj in self.exercises:
+            assert obj.difficulty == new_difficulty
+
+    def test_delete(self):
+        for obj in self.exercises:
+            obj.delete()
+        courses = Course.objects.all()
+        lessons = Lesson.objects.all()
+        exercises = Exercise.objects.all()
+        assert len(courses) == self.batch_size
+        assert len(lessons) == self.batch_size
+        assert not len(exercises)
+
+    def test_fields(self):
+        for obj in self.exercises:
+            assert obj.uuid
+            assert obj.lesson
+            assert obj.lesson.course
+            assert isinstance(obj.difficulty, int)
