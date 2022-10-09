@@ -64,6 +64,7 @@ class Lesson(TimeStampedModel):
     slug = models.SlugField(default='', max_length=255, unique=True)
     theory = models.TextField(_('Theory'), blank=True, default='')
     status = StatusField()
+    tracker = FieldTracker(fields=['title'])
 
     class Meta:
         verbose_name = _('Lesson')
@@ -71,6 +72,11 @@ class Lesson(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug or self.title != self.tracker.previous('title'):
+            self.slug = get_unique_slug(Lesson, self.title)
+        return super().save(*args, **kwargs)
 
 
 class Exercise(TimeStampedModel):
