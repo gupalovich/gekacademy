@@ -3,9 +3,11 @@ import uuid as uuid_lib
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from model_utils import Choices
+from model_utils import Choices, FieldTracker
 from model_utils.models import TimeStampedModel
 from model_utils.fields import StatusField
+
+from study.core.utils import get_unique_slug
 
 
 class Course(models.Model):
@@ -24,6 +26,7 @@ class Course(models.Model):
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(default='', max_length=55, unique=True)
     status = StatusField()
+    tracker = FieldTracker(fields=['title'])
 
     class Meta:
         verbose_name = _('Course')
@@ -31,6 +34,11 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug or self.title != self.tracker.previous('title'):
+            self.slug = get_unique_slug(Course, self.title)
+        return super().save(*args, **kwargs)
 
 
 class Lesson(TimeStampedModel):
