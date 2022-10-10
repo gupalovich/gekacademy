@@ -34,7 +34,7 @@ class CourseTests(TestCase):
     def test_fields(self):
         for obj in self.courses:
             assert obj.uuid
-            assert len(obj.title) >= 5
+            assert len(obj.title) >= 3
             assert slugify(translit(obj.title, 'ru', reversed=True)) == obj.slug
             assert obj.status == 'draft' or obj.status == 'published'
 
@@ -70,8 +70,8 @@ class LessonTests(TestCase):
     def test_fields(self):
         for obj in self.lessons:
             assert obj.uuid
-            assert obj.course.uuid
-            assert len(obj.title) >= 5
+            assert obj.course.slug
+            assert len(obj.title) >= 3
             assert len(obj.theory) >= 5
             assert slugify(translit(obj.title, 'ru', reversed=True)) == obj.slug
             assert obj.status == 'draft' or obj.status == 'published'

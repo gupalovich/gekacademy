@@ -6,7 +6,7 @@ from ..models import Course, Lesson, Exercise
 
 
 class CourseFactory(DjangoModelFactory):
-    title = Faker('sentence', nb_words=4, locale='ru_RU')
+    title = Faker('sentence', nb_words=3, locale='ru_RU')
     status = FuzzyChoice(choices=['draft', 'published'])
 
     class Meta:

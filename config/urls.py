@@ -18,7 +18,7 @@ urlpatterns = [
     path("users/", include("study.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("", include("study.lessons.urls", namespace="lessons")),
+    path("sub/", include("study.lessons.urls", namespace="lessons")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS

@@ -76,7 +76,10 @@ class Lesson(TimeStampedModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('lessons:lesson', kwargs={'lesson_slug': self.slug})
+        return reverse(
+            'lessons:lesson',
+            kwargs={'course_slug': self.course.slug, 'lesson_slug': self.slug}
+        )
 
     def save(self, *args, **kwargs):
         if not self.slug or self.title != self.tracker.previous('title'):
