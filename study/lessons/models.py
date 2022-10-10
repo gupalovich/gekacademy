@@ -112,7 +112,14 @@ class Exercise(TimeStampedModel):
         verbose_name_plural = _('Exercises')
 
     def get_absolute_url(self):
-        return reverse('lessons:exercise', kwargs={'exercise_uuid': self.uuid})
+        return reverse(
+            'lessons:exercise',
+            kwargs={
+                'course_slug': self.lesson.course.slug,
+                'lesson_slug': self.lesson.slug,
+                'exercise_uuid': self.uuid,
+            }
+        )
 
     def save(self, *args, **kwargs):
         return super().save(*args, **kwargs)

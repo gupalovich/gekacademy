@@ -10,3 +10,7 @@ class CourseView(DetailView):
 
 class LessonView(ListView):
     model = Lesson
+
+
+class ExerciseView(DetailView):
+    model = Exercise
