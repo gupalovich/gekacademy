@@ -4,13 +4,13 @@ from django.views.generic import DetailView, ListView
 from .models import Course, Lesson, Exercise
 
 
-class CourseView(DetailView):
+class CourseListView(ListView):
     model = Course
 
 
-class LessonView(ListView):
+class LessonListView(ListView):
     model = Lesson
 
 
-class ExerciseView(DetailView):
+class ExerciseDetailView(DetailView):
     model = Exercise
