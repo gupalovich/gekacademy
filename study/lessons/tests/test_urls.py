@@ -3,7 +3,7 @@ from django.urls import resolve, reverse
 from ..models import Course, Lesson, Exercise
 
 
-url_prefix = '/sub'
+url_prefix = '/learn'
 
 
 def test_course(course: Course):
