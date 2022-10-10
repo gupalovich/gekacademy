@@ -24,7 +24,7 @@ class Course(models.Model):
         default=uuid_lib.uuid4,
         editable=False)
     title = models.CharField(_('Title'), max_length=255)
-    slug = models.SlugField(default='', max_length=55, unique=True)
+    slug = models.SlugField(default='', max_length=255, unique=True)
     status = StatusField()
     tracker = FieldTracker(fields=['title'])
 

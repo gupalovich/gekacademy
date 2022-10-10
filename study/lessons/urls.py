@@ -1,4 +1,10 @@
 from django.urls import path
 
-app_name = "lessons"
-urlpatterns = []
+from .views import CourseView
+
+
+app_name = 'lessons'
+
+urlpatterns = [
+    path('<slug:course_slug>/', view=CourseView.as_view(), name='course')
+]

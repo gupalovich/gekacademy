@@ -1,4 +1,4 @@
-from factory import SubFactory, Faker, post_generation
+from factory import SubFactory, Faker
 from factory.fuzzy import FuzzyChoice
 from factory.django import DjangoModelFactory
 
@@ -6,7 +6,7 @@ from ..models import Course, Lesson, Exercise
 
 
 class CourseFactory(DjangoModelFactory):
-    title = Faker('name', locale='ru_RU')
+    title = Faker('sentence', nb_words=4, locale='ru_RU')
     status = FuzzyChoice(choices=['draft', 'published'])
 
     class Meta:
@@ -16,7 +16,7 @@ class CourseFactory(DjangoModelFactory):
 
 class LessonFactory(DjangoModelFactory):
     course = SubFactory(CourseFactory)
-    title = Faker('name', locale='ru_RU')
+    title = Faker('sentence', nb_words=4, locale='ru_RU')
     theory = Faker('text')
     status = FuzzyChoice(choices=['draft', 'published'])
 
