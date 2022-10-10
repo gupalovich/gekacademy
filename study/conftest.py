@@ -22,6 +22,11 @@ def course(db) -> Course:
 
 
 @pytest.fixture
+def course_ten(db) -> list[Course]:
+    return CourseFactory.create_batch(size=10)
+
+
+@pytest.fixture
 def lesson(db) -> Lesson:
     return LessonFactory()
 
