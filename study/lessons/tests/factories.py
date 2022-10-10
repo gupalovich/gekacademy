@@ -17,7 +17,7 @@ class CourseFactory(DjangoModelFactory):
 class LessonFactory(DjangoModelFactory):
     course = SubFactory(CourseFactory)
     title = Faker('name', locale='ru_RU')
-    theory = Faker('name')
+    theory = Faker('text')
     status = FuzzyChoice(choices=['draft', 'published'])
 
     class Meta:

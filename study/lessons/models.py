@@ -1,6 +1,7 @@
 import uuid as uuid_lib
 
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from model_utils import Choices, FieldTracker
@@ -12,8 +13,7 @@ from study.core.utils import get_unique_slug
 
 class Course(models.Model):
     """Направление-наука изучения.
-       Пример: Математика 1 класс
-       url: /<slug>/"""
+       Пример: Математика 1 класс"""
     # choices
     STATUS = Choices(
         ('draft', _('draft')),
@@ -35,6 +35,9 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('lessons:course', kwargs={'course_slug': self.slug})
+
     def save(self, *args, **kwargs):
         if not self.slug or self.title != self.tracker.previous('title'):
             self.slug = get_unique_slug(Course, self.title)
@@ -43,8 +46,7 @@ class Course(models.Model):
 
 class Lesson(TimeStampedModel):
     """Тема урока.
-       Пример: Сложение
-       url: /<course_slug>/addition/"""
+       Пример: Сложение"""
     # choices
     STATUS = Choices(
         ('draft', _('draft')),
@@ -73,6 +75,9 @@ class Lesson(TimeStampedModel):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('lessons:lesson', kwargs={'lesson_slug': self.slug})
+
     def save(self, *args, **kwargs):
         if not self.slug or self.title != self.tracker.previous('title'):
             self.slug = get_unique_slug(Lesson, self.title)
@@ -80,8 +85,7 @@ class Lesson(TimeStampedModel):
 
 
 class Exercise(TimeStampedModel):
-    """Задача на тематику урока
-    url: /<course_slug>/<lesson_slug>/<uuid>"""
+    """Практическая задача на тематику урока"""
     # choices
     DIFFICULTY = [(i, str(i)) for i in range(10)]
     # fields
@@ -103,6 +107,12 @@ class Exercise(TimeStampedModel):
     class Meta:
         verbose_name = _('Exercise')
         verbose_name_plural = _('Exercises')
+
+    def get_absolute_url(self):
+        return reverse('lessons:exercise', kwargs={'exercise_uuid': self.uuid})
+
+    def save(self, *args, **kwargs):
+        return super().save(*args, **kwargs)
 
 
 class ExerciseAnswer(TimeStampedModel):
