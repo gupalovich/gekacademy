@@ -10,8 +10,8 @@ if settings.DEBUG:
 else:
     router = SimpleRouter()
 
-router.register('users', UserViewSet)
-router.register('courses', CourseViewSet)
+router.register('users', UserViewSet, basename='user')
+router.register('courses', CourseViewSet, basename='course')
 
 
 app_name = 'api'
