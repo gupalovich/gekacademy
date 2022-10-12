@@ -11,3 +11,9 @@ class CourseSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'url': {'view_name': 'api:course-detail', 'lookup_field': 'uuid'}
         }
+
+
+class LessonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        exclude = ('id', 'course', )
