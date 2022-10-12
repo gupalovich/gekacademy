@@ -19,3 +19,9 @@ class CourseViewSet(ReadOnlyModelViewSet):
         lessons_qs = instance.lessons.all()
         serializer = LessonSerializer(lessons_qs, many=True)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+
+class LessonViewSet(ReadOnlyModelViewSet):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+    lookup_field = 'uuid'

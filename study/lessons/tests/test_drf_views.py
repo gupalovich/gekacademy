@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from study.users.models import User
 from ..models import Course, Lesson
-from ..api.views import CourseViewSet
+from ..api.views import CourseViewSet, LessonViewSet
 from .factories import LessonFactory
 
 
@@ -67,3 +67,21 @@ class TestCourseViewSet:
         request.user = user
         response = CourseViewSet.as_view({'get': 'lessons'})(request, uuid=uuid)
         assert response.status_code == 404
+
+
+class TestLessonViewSet:
+    def test_get_queryset(self, lesson_ten: list[Lesson], user: User, rf: RequestFactory):
+        """Тест ответа для lesson-list"""
+        request = rf.get(reverse('api:lesson-list'))
+        request.user = user
+        response = LessonViewSet.as_view({'get': 'list'})(request)
+        pprint(json.loads(json.dumps(response.data)))
+        assert response.status_code == 200
+        assert len(response.data) == 10
+        assert 'uuid' in response.data[0]
+
+    def test_get_queryset_anon(self, lesson_ten: list[Lesson], rf: RequestFactory):
+        """Тест ответа для lesson-list anon user"""
+        request = rf.get(reverse('api:lesson-list'))
+        response = LessonViewSet.as_view({'get': 'list'})(request)
+        assert response.status_code == 403
