@@ -85,3 +85,19 @@ class TestLessonViewSet:
         request = rf.get(reverse('api:lesson-list'))
         response = LessonViewSet.as_view({'get': 'list'})(request)
         assert response.status_code == 403
+
+    def test_detail(self, lesson: Lesson, user: User, rf: RequestFactory):
+        """Тест ответа для lesson-detail"""
+        uuid = lesson.uuid
+        request = rf.get(reverse('api:lesson-detail', kwargs={'uuid': uuid}))
+        request.user = user
+        response = LessonViewSet.as_view({'get': 'retrieve'})(request, uuid=uuid)
+        assert response.status_code == 200
+
+    def test_detail_404(self, lesson: Lesson, user: User, rf: RequestFactory):
+        """Тест ответа для lesson-detail"""
+        uuid = uuid_lib.uuid4()
+        request = rf.get(reverse('api:lesson-detail', kwargs={'uuid': uuid}))
+        request.user = user
+        response = LessonViewSet.as_view({'get': 'retrieve'})(request, uuid=uuid)
+        assert response.status_code == 404

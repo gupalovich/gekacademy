@@ -16,4 +16,19 @@ class CourseSerializer(serializers.ModelSerializer):
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        fields = '__all__'
+        fields = [
+            'url',
+            'uuid',
+            'course',
+            'title',
+            'slug',
+            'theory',
+            'status',
+            'created',
+            'modified',
+        ]
+        depth = 1  # field nested depth
+
+        extra_kwargs = {
+            'url': {'view_name': 'api:lesson-detail', 'lookup_field': 'uuid'}
+        }

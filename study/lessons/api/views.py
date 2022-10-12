@@ -8,7 +8,7 @@ from .serializers import CourseSerializer, LessonSerializer
 
 
 class CourseViewSet(ReadOnlyModelViewSet):
-    queryset = Course.objects.all()
+    queryset = Course.objects.prefetch_related('lessons')
     serializer_class = CourseSerializer
     lookup_field = 'uuid'
 
@@ -17,11 +17,11 @@ class CourseViewSet(ReadOnlyModelViewSet):
         """Загрузить lessons относящиейся к Course; Url name - api:course-lessons"""
         instance = self.get_object()
         lessons_qs = instance.lessons.all()
-        serializer = LessonSerializer(lessons_qs, many=True)
+        serializer = LessonSerializer(lessons_qs, many=True, context={'request': request})
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 
 class LessonViewSet(ReadOnlyModelViewSet):
-    queryset = Lesson.objects.all()
+    queryset = Lesson.objects.select_related('course')
     serializer_class = LessonSerializer
     lookup_field = 'uuid'
