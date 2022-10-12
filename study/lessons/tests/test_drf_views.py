@@ -8,7 +8,7 @@ from django.urls import reverse
 from study.users.models import User
 from ..models import Course, Lesson
 from ..api.views import CourseViewSet, LessonViewSet
-from .factories import LessonFactory
+from .factories import LessonFactory, ExerciseFactory
 
 
 class TestCourseViewSet:
@@ -100,4 +100,32 @@ class TestLessonViewSet:
         request = rf.get(reverse('api:lesson-detail', kwargs={'uuid': uuid}))
         request.user = user
         response = LessonViewSet.as_view({'get': 'retrieve'})(request, uuid=uuid)
+        assert response.status_code == 404
+
+    def test_exercises(self, lesson: Lesson, user: User, rf: RequestFactory):
+        """"Тест ответа для lesson-exercises
+           Создать {batch_size} exercises, проверить ответ/данные
+           To_dict: pprint(json.loads(json.dumps(response.data)))
+        """
+        uuid = lesson.uuid
+        batch_size = 5
+        # create {batch_size} lessons
+        [ExerciseFactory(lesson=lesson) for i in range(batch_size)]
+        # build request
+        request = rf.get(reverse('api:lesson-exercises', kwargs={'uuid': uuid}))
+        # set user auth
+        request.user = user
+        response = LessonViewSet.as_view({'get': 'exercises'})(request, uuid=uuid)
+        assert response.status_code == 200
+        assert len(response.data) == batch_size
+
+    def test_exercises_404(self, lesson: Lesson, user: User, rf: RequestFactory):
+        """"Тест ответа для lesson-exercises
+           Создать {batch_size} exercises, проверить ответ/данные
+           To_dict: pprint(json.loads(json.dumps(response.data)))
+        """
+        uuid = uuid_lib.uuid4()
+        request = rf.get(reverse('api:lesson-exercises', kwargs={'uuid': uuid}))
+        request.user = user
+        response = LessonViewSet.as_view({'get': 'exercises'})(request, uuid=uuid)
         assert response.status_code == 404

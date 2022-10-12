@@ -1,9 +1,9 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from ..models import Course, Lesson, Exercise
 
 
-class CourseSerializer(serializers.ModelSerializer):
+class CourseSerializer(ModelSerializer):
     class Meta:
         model = Course
         fields = ['url', 'uuid', 'title', 'slug', 'status']
@@ -13,7 +13,7 @@ class CourseSerializer(serializers.ModelSerializer):
         }
 
 
-class LessonSerializer(serializers.ModelSerializer):
+class LessonSerializer(ModelSerializer):
     class Meta:
         model = Lesson
         fields = [
@@ -32,3 +32,10 @@ class LessonSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'url': {'view_name': 'api:lesson-detail', 'lookup_field': 'uuid'}
         }
+
+
+class ExerciseSerializer(ModelSerializer):
+    class Meta:
+        model = Exercise
+        fields = '__all__'
+        depth = 1
