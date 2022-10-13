@@ -23,7 +23,7 @@ def course(db) -> Course:
 
 @pytest.fixture
 def course_ten(db) -> list[Course]:
-    return CourseFactory.create_batch(size=10, status='published')
+    return CourseFactory.create_batch(size=10)
 
 
 @pytest.fixture
@@ -33,7 +33,7 @@ def lesson(db) -> Lesson:
 
 @pytest.fixture
 def lesson_ten(db) -> list[Lesson]:
-    return LessonFactory.create_batch(size=10, status='published')
+    return LessonFactory.create_batch(size=10)
 
 
 @pytest.fixture
