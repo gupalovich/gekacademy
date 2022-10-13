@@ -9,11 +9,14 @@ from model_utils.models import TimeStampedModel
 from model_utils.fields import StatusField
 
 from study.core.utils import get_unique_slug
+from .managers import CourseManager, LessonManager
 
 
 class Course(models.Model):
     """Направление-наука изучения.
        Пример: Математика 1 класс"""
+    # manager
+    objects = CourseManager()
     # choices
     STATUS = Choices(
         ('draft', _('draft')),
@@ -47,6 +50,8 @@ class Course(models.Model):
 class Lesson(TimeStampedModel):
     """Тема урока.
        Пример: Сложение"""
+    # manager
+    objects = LessonManager()
     # choices
     STATUS = Choices(
         ('draft', _('draft')),
