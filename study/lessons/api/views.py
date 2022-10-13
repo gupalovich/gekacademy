@@ -8,7 +8,7 @@ from .serializers import CourseSerializer, LessonSerializer, ExerciseSerializer
 
 
 class CourseViewSet(ReadOnlyModelViewSet):
-    queryset = Course.objects.prefetch_related('lessons')
+    queryset = Course.objects.published().prefetch_related('lessons')
     serializer_class = CourseSerializer
     lookup_field = 'uuid'
 
@@ -22,7 +22,7 @@ class CourseViewSet(ReadOnlyModelViewSet):
 
 
 class LessonViewSet(ReadOnlyModelViewSet):
-    queryset = Lesson.objects.select_related('course')
+    queryset = Lesson.objects.published().select_related('course')
     serializer_class = LessonSerializer
     lookup_field = 'uuid'
 
