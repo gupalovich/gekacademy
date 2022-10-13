@@ -39,3 +39,8 @@ def lesson_ten(db) -> list[Lesson]:
 @pytest.fixture
 def exercise(db) -> Exercise:
     return ExerciseFactory()
+
+
+@pytest.fixture
+def exercise_ten(db) -> list[Exercise]:
+    return ExerciseFactory.create_batch(size=10)

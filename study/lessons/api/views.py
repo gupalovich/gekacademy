@@ -13,7 +13,7 @@ class CourseViewSet(ReadOnlyModelViewSet):
     lookup_field = 'uuid'
 
     @action(detail=True)
-    def lessons(self, request, *args, **kwargs):
+    def lessons(self, request, *args, **kwargs) -> Response:
         """Загрузить lessons относящиейся к Course; Url name - api:course-lessons"""
         instance = self.get_object()
         lessons_qs = instance.lessons.all()
@@ -27,9 +27,15 @@ class LessonViewSet(ReadOnlyModelViewSet):
     lookup_field = 'uuid'
 
     @action(detail=True)
-    def exercises(self, request, *args, **kwargs):
+    def exercises(self, request, *args, **kwargs) -> Response:
         """Загрузить exercises относящиейся к Lesson; Url name - api:lesson-exercises"""
         instance = self.get_object()
         exercise_qs = instance.exercises.all()
         serializer = ExerciseSerializer(exercise_qs, many=True, context={'request': request})
         return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+
+class ExerciseViewSet(ReadOnlyModelViewSet):
+    queryset = Exercise.objects.select_related('lesson')
+    serializer_class = ExerciseSerializer
+    lookup_field = 'uuid'
