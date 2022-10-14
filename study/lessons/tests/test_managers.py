@@ -16,7 +16,8 @@ class TestCourseManager(TestCase):
 
         assert len(qs_all) == self.batch_size * 2
         assert len(qs) == self.batch_size
-        assert qs[0].status == 'published'
+        assert qs.first().status == 'published'
+        assert qs.last().status == 'published'
 
 
 class TestLessonManager(TestCase):
@@ -31,4 +32,5 @@ class TestLessonManager(TestCase):
 
         assert len(qs_all) == self.batch_size * 2
         assert len(qs) == self.batch_size
-        assert qs[0].status == 'published'
+        assert qs.first().status == 'published'
+        assert qs.last().status == 'published'
