@@ -1,72 +1,73 @@
 # Gek Academy    [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 
-Интерактивная платформа по обучению математических наук.
+![image](https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Gekko_gecko_%2835838165973%29.jpg/1024px-Gekko_gecko_%2835838165973%29.jpg)
 
-Цель: 
+Интерактивная платформа по обучению математических наук, подобие duolingo.
 
+#### Цели: 
 
+- Восстановление навыков django, django-orm, drf
+- Восстановление навыков javascript (reactjs)
+- Обучение новым технологиям и подходам
 
-Лицензия: MIT
-
-## Settings
+## Настройки `config/settings`
 
 Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
 
-## Basic Commands
+## Модели
 
-### Setting Up Your Users
+TODO
 
--   To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+## API
 
--   To create a **superuser account**, use this command:
-
-        $ python manage.py createsuperuser
-
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
+Для репрезентации используется OpenApi - Swagger генерация
 
 ### Type checks
 
 Running type checks with mypy:
 
-    $ mypy study
+    $ mypy gekacademy
 
 ### Test coverage
 
-To run the tests, check your test coverage, and generate an HTML coverage report:
+Команды для запуска тестов, проверки покрытия unit-тестамы, генерация HTML-отчета:
 
     $ coverage run -m pytest
     $ coverage html
     $ open htmlcov/index.html
 
-#### Running tests with pytest
+### Тестирование
 
     $ pytest
+    $ pytest -s (with i/o logging)
 
-### Live reloading and Sass CSS compilation
+Тест отдельного модуля    
 
-Moved to [Live reloading and SASS compilation](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally.html#sass-compilation-live-reloading).
+    $ pytest /tests/test_models.py
+    
+Тест только с декоратором `@pytest.mark.slow`
+
+    $ pytest -v -m slow
+
+Инверсия предыдущей команды - исключить тесты с декоратором `@pytest.mark.slow`)
+    
+    $ pytest -v -m "not slow" 
 
 ### Celery
 
-This app comes with Celery.
+Команды запускать только из корня проекта
 
-To run a celery worker:
+#### Запустить воркера:
 
-``` bash
-cd study
-celery -A config.celery_app worker -l info
-```
-
-Please note: For Celery's import magic to work, it is important *where* the celery commands are run. If you are in the same folder with *manage.py*, you should be right.
+    $ celery -A config.celery_app worker -l info
 
 ### Email Server
 
-In development, it is often nice to be able to see emails that are being sent from your application. For that reason local SMTP server [MailHog](https://github.com/mailhog/MailHog) with a web interface is available as docker container.
+В разработке используется эмуляция  smtp сервера [MailHog](https://github.com/mailhog/MailHog) с интерфейсом докер контейнера.
 
-Container mailhog will start automatically when you will run all docker containers.
-Please check [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html) for more details how to start all containers.
+Контейнер mailhog-а стартует автоматически со всеми остальными контейнерами.
 
-With MailHog running, to view messages that are sent by your application, open your browser and go to `http://127.0.0.1:8025`
+При тестировании авторизации, сообщения о подтверждении e-mail отправляются в `http://127.0.0.1:8025`
 
 ### Sentry
 
@@ -75,33 +76,44 @@ The system is set up with reasonable defaults, including 404 logging and integra
 
 You must set the DSN url in production.
 
-### HTTPS
+## HTTPS
 Сертификаты и ключи хранятся в `certs/*`
 
-Команда для генерации локального сертификата (не подтвержденного)
+#### Генерации локального сертификата (не подтвержденного)
 
     $ openssl req -x509 -out localhost.crt -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj "/CN=localhost"
 
-Для windows - установить mkcert
-    https://words.filippo.io/mkcert-valid-https-certificates-for-localhost/
+### Для windows
 
+#### Установить [chocolatey](https://chocolatey.org/install)
+
+    $ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    
+    $ choco 
+
+#### Установить [mkcert](https://github.com/FiloSottile/mkcert)
+
+    $ choco install mkcert
+    
     $ mkcert -install
-    $ mkcert -key-file study.local.key -cert-file study.local.crt localhost 127.0.0.1 ::1 study.local
+    $ mkcert -key-file gekacademy.local.key -cert-file gekacademy.local.crt localhost 127.0.0.1 ::1 gekacademy.local
 
-    hosts file: 127.0.0.1 .study.local
+#### Обновить windows hosts file
 
-Инструкции по подключению сертификата c docker
-    https://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html#developing-locally-with-https
+     127.0.0.1 .gekacademy.local
+
+### [Инструкции по подключению сертификата c docker](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html#developing-locally-with-https)
+    
 
 ## Deployment
 
-Инструкции по деплою
+**Инструкции по деплою**
 
 ### Docker
 
 See detailed [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html).
 
-Команды
+#### Команды
 
     $ docker-compose -f local.yml up
 
@@ -109,17 +121,17 @@ See detailed [cookiecutter-django Docker documentation](http://cookiecutter-djan
     $ docker-compose up
     $ docker-compose up -d  (detached-daemon)
 
-Вызов команды внутри контейнера
+#### Вызов команды внутри контейнера
 
     $ docker-compose -f local.yml run --rm django python manage.py migrate
     $ docker-compose -f local.yml run --rm django python manage.py createsuperuser
     $ docker-compose -f local.yml run --rm django pip install
 
-Ребилд
+#### Ребилд
 
     $ docker-compose -f local.yml up --build
 
-Bash
+#### Bash
 
     $ docker-compose -f local.yml run django bash
-        $ exit
+    $ exit
