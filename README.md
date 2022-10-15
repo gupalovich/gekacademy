@@ -1,11 +1,12 @@
-# Study Science
+# Gek Academy    [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 
-Интерактивная платформа по обучению алгебры и других наук
+Интерактивная платформа по обучению математических наук.
 
-[![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
-[![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+Цель: 
 
-License: MIT
+
+
+Лицензия: MIT
 
 ## Settings
 
@@ -75,7 +76,7 @@ The system is set up with reasonable defaults, including 404 logging and integra
 You must set the DSN url in production.
 
 ### HTTPS
-Сертификаты и ключи хранятся в `certs/`
+Сертификаты и ключи хранятся в `certs/*`
 
 Команда для генерации локального сертификата (не подтвержденного)
 
@@ -94,7 +95,7 @@ You must set the DSN url in production.
 
 ## Deployment
 
-The following details how to deploy this application.
+Инструкции по деплою
 
 ### Docker
 
