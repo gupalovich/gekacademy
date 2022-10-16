@@ -27,7 +27,7 @@ class Course(models.Model):
         default=uuid_lib.uuid4,
         editable=False)
     title = models.CharField(_('Title'), max_length=255)
-    slug = models.SlugField(default='', max_length=255, unique=True)
+    slug = models.SlugField(max_length=128, unique=True)
     status = StatusField()
     tracker = FieldTracker(fields=['title'])
 
@@ -68,7 +68,7 @@ class Lesson(TimeStampedModel):
         related_query_name='%(class)s',
     )
     title = models.CharField(_('Title'), max_length=255)
-    slug = models.SlugField(default='', max_length=255, unique=True)
+    slug = models.SlugField(max_length=128, unique=True)
     theory = models.TextField(_('Theory'), blank=True, default='')
     status = StatusField()
     tracker = FieldTracker(fields=['title'])
@@ -111,6 +111,7 @@ class Exercise(TimeStampedModel):
         _('Difficulty'),
         choices=DIFFICULTY,
         default=DIFFICULTY[0])
+    premium = models.BooleanField(_('Premium'), default=False)
 
     class Meta:
         verbose_name = _('Exercise')
