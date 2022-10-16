@@ -13,6 +13,13 @@ class Promotion(TimeStampedModel):
     description = models.TextField(_('Description'), blank=True, default='')
     discount = models.FloatField(_('Discount'), default=0.0)
 
+    class Meta:
+        verbose_name = _('Promotion')
+        verbose_name_plural = _('Promotions')
+
+    def __str__(self):
+        return '%s-%.2f' % (self.name, self.discount)
+
 
 class Product(TimeStampedModel):
     # choices
@@ -33,6 +40,13 @@ class Product(TimeStampedModel):
     currency = models.CharField(max_length=2, choices=Currency.choices, default=Currency.RUB)
     image = models.ImageField(_('Poster'), blank=True, default='', upload_to='products/')
 
+    class Meta:
+        verbose_name = _('Product')
+        verbose_name_plural = _('Products')
+
+    def __str__(self):
+        return self.name
+
 
 class Order(TimeStampedModel):
     # relations
@@ -44,3 +58,10 @@ class Order(TimeStampedModel):
         default=uuid_lib.uuid4,
         editable=False)
     quantity = models.IntegerField(default=1)
+
+    class Meta:
+        verbose_name = _('Order')
+        verbose_name_plural = _('Orders')
+
+    def __str__(self):
+        return self.uuid
