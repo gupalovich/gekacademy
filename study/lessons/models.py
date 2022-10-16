@@ -56,17 +56,18 @@ class Lesson(TimeStampedModel):
     STATUS = Choices(
         ('draft', _('draft')),
         ('published', _('published')))
-    # fields
-    uuid = models.UUIDField(
-        db_index=True,
-        default=uuid_lib.uuid4,
-        editable=False)
+    # relations
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
         related_name='%(class)ss',
         related_query_name='%(class)s',
     )
+    # fields
+    uuid = models.UUIDField(
+        db_index=True,
+        default=uuid_lib.uuid4,
+        editable=False)
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(max_length=128, unique=True)
     theory = models.TextField(_('Theory'), blank=True, default='')
@@ -96,17 +97,18 @@ class Exercise(TimeStampedModel):
     """Практическая задача на тематику урока"""
     # choices
     DIFFICULTY = [(i, str(i)) for i in range(10)]
-    # fields
-    uuid = models.UUIDField(
-        db_index=True,
-        default=uuid_lib.uuid4,
-        editable=False)
+    # relations
     lesson = models.ForeignKey(
         Lesson,
         on_delete=models.CASCADE,
         related_name='%(class)ss',
         related_query_name='%(class)s',
     )
+    # fields
+    uuid = models.UUIDField(
+        db_index=True,
+        default=uuid_lib.uuid4,
+        editable=False)
     difficulty = models.IntegerField(
         _('Difficulty'),
         choices=DIFFICULTY,
