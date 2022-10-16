@@ -49,6 +49,10 @@ class Product(TimeStampedModel):
 
 
 class Order(TimeStampedModel):
+    class Status(models.TextChoices):
+        FAILED = 'FAILED', _('Failed')
+        PENDING = 'PENDING', _('Pending')
+        SUCCESS = 'SUCCESS', _('Success')
     # relations
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -58,6 +62,7 @@ class Order(TimeStampedModel):
         default=uuid_lib.uuid4,
         editable=False)
     quantity = models.IntegerField(default=1)
+    status = models.CharField(max_length=55, choices=Status.choices, default=Status.PENDING)
 
     class Meta:
         verbose_name = _('Order')
