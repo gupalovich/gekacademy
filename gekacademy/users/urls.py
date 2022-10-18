@@ -1,6 +1,6 @@
 from django.urls import path
 
-from study.users.views import (
+from gekacademy.users.views import (
     user_detail_view,
     user_redirect_view,
     user_update_view,

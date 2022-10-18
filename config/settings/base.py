@@ -6,8 +6,8 @@ from pathlib import Path
 import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# study/
-APPS_DIR = ROOT_DIR / "study"
+# gekacademy/
+APPS_DIR = ROOT_DIR / "gekacademy"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -82,9 +82,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "study.core",
-    "study.users",
-    "study.lessons",
+    "gekacademy.core",
+    "gekacademy.users",
+    "gekacademy.lessons",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -92,7 +92,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "study.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "gekacademy.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "study.users.context_processors.allauth_settings",
+                "gekacademy.users.context_processors.allauth_settings",
             ],
         },
     }
@@ -293,13 +293,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "study.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "gekacademy.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-ACCOUNT_FORMS = {"signup": "study.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "gekacademy.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "study.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "gekacademy.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "study.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {"signup": "gekacademy.users.forms.UserSocialSignupForm"}
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'METHOD': 'oauth2',
@@ -335,13 +335,13 @@ CORS_URLS_REGEX = r"^/api/.*$"
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Study Science API",
-    "DESCRIPTION": "Documentation of API endpoints of Study Science",
+    "TITLE": "Gek Academy API",
+    "DESCRIPTION": "Documentation of API endpoints of Gek Academy",
     "VERSION": "1.0.0",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
     "SERVERS": [
         {"url": "http://127.0.0.1:8000", "description": "Local Development server"},
-        {"url": "https://study.local", "description": "Production server"},
+        {"url": "https://gekacademy.com", "description": "Production server"},
     ],
 }
 # Your stuff...

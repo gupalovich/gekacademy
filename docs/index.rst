@@ -1,9 +1,9 @@
-.. Study Science documentation master file, created by
+.. Gek Academy documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Study Science's documentation!
+Welcome to Gek Academy's documentation!
 ======================================================================
 
 .. toctree::

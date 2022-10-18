@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: study_production_django
+    image: gekacademy_production_django
     platform: linux/x86_64
     depends_on:
       - postgres
@@ -24,7 +24,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: study_production_postgres
+    image: gekacademy_production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data:Z
       - production_postgres_data_backups:/backups:z
@@ -35,7 +35,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/traefik/Dockerfile
-    image: study_production_traefik
+    image: gekacademy_production_traefik
     depends_on:
       - django
     volumes:
@@ -50,15 +50,15 @@ services:
 
   celeryworker:
     <<: *django
-    image: study_production_celeryworker
+    image: gekacademy_production_celeryworker
     command: /start-celeryworker
 
   celerybeat:
     <<: *django
-    image: study_production_celerybeat
+    image: gekacademy_production_celerybeat
     command: /start-celerybeat
 
   flower:
     <<: *django
-    image: study_production_flower
+    image: gekacademy_production_flower
     command: /start-flower

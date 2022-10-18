@@ -1,16 +1,16 @@
 version: '3'
 
 volumes:
-  study_local_postgres_data: {}
-  study_local_postgres_data_backups: {}
+  gekacademy_local_postgres_data: {}
+  gekacademy_local_postgres_data_backups: {}
 
 services:
   django: &django
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: study_local_django
-    container_name: study_local_django
+    image: gekacademy_local_django
+    container_name: gekacademy_local_django
     platform: linux/x86_64
     depends_on:
       - postgres
@@ -29,17 +29,17 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: study_production_postgres
-    container_name: study_local_postgres
+    image: gekacademy_production_postgres
+    container_name: gekacademy_local_postgres
     volumes:
-      - study_local_postgres_data:/var/lib/postgresql/data:Z
-      - study_local_postgres_data_backups:/backups:z
+      - gekacademy_local_postgres_data:/var/lib/postgresql/data:Z
+      - gekacademy_local_postgres_data_backups:/backups:z
     env_file:
       - ./.envs/.local/.postgres
 
   docs:
-    image: study_local_docs
-    container_name: study_local_docs
+    image: gekacademy_local_docs
+    container_name: gekacademy_local_docs
     platform: linux/x86_64
     build:
       context: .
@@ -49,25 +49,25 @@ services:
     volumes:
       - ./docs:/docs:z
       - ./config:/app/config:z
-      - ./study:/app/study:z
+      - ./gekacademy:/app/gekacademy:z
     ports:
       - "9000:9000"
     command: /start-docs
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
-    container_name: study_local_mailhog
+    container_name: gekacademy_local_mailhog
     ports:
       - "8025:8025"
 
   redis:
     image: redis:6
-    container_name: study_local_redis
+    container_name: gekacademy_local_redis
 
   celeryworker:
     <<: *django
-    image: study_local_celeryworker
-    container_name: study_local_celeryworker
+    image: gekacademy_local_celeryworker
+    container_name: gekacademy_local_celeryworker
     depends_on:
       - redis
       - postgres
@@ -77,8 +77,8 @@ services:
 
   celerybeat:
     <<: *django
-    image: study_local_celerybeat
-    container_name: study_local_celerybeat
+    image: gekacademy_local_celerybeat
+    container_name: gekacademy_local_celerybeat
     depends_on:
       - redis
       - postgres
@@ -88,15 +88,15 @@ services:
 
   flower:
     <<: *django
-    image: study_local_flower
-    container_name: study_local_flower
+    image: gekacademy_local_flower
+    container_name: gekacademy_local_flower
     ports:
       - "5555:5555"
     command: /start-flower
 
   nginx-proxy:
     image: jwilder/nginx-proxy:alpine
-    container_name: study_local_nginx-proxy
+    container_name: gekacademy_local_nginx-proxy
     ports:
       - "80:80"
       - "443:443"

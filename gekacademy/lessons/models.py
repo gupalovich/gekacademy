@@ -8,7 +8,7 @@ from model_utils import Choices, FieldTracker
 from model_utils.models import TimeStampedModel
 from model_utils.fields import StatusField
 
-from study.core.utils import get_unique_slug
+from gekacademy.core.utils import get_unique_slug
 from .managers import CourseManager, LessonManager
 
 

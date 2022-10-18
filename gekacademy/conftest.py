@@ -1,9 +1,9 @@
 import pytest
 
-from study.users.models import User
-from study.users.tests.factories import UserFactory
-from study.lessons.models import Course, Lesson, Exercise
-from study.lessons.tests.factories import CourseFactory, LessonFactory, ExerciseFactory
+from gekacademy.users.models import User
+from gekacademy.users.tests.factories import UserFactory
+from gekacademy.lessons.models import Course, Lesson, Exercise
+from gekacademy.lessons.tests.factories import CourseFactory, LessonFactory, ExerciseFactory
 
 
 @pytest.fixture(autouse=True)

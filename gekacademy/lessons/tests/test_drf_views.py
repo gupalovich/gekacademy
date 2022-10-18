@@ -5,7 +5,7 @@ from pprint import pprint
 from django.test import RequestFactory
 from django.urls import reverse
 
-from study.users.models import User
+from gekacademy.users.models import User
 from ..models import Course, Lesson, Exercise
 from ..api.views import CourseViewSet, LessonViewSet, ExerciseViewSet
 from .factories import LessonFactory, ExerciseFactory

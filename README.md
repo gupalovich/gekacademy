@@ -4,6 +4,7 @@
 
 > Интерактивная платформа по обучению математических наук, подобие duolingo.
 > Важно достигнуть эффекта 'игры' и соперничества, а также мотивации, по средству разных психологических подходов в обучении.
+> Версия: 0.3.0
 
 #### Цели: 
 
@@ -115,6 +116,8 @@ You must set the DSN url in production.
 See detailed [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html).
 
 #### Команды
+
+    $ docker-compose -f local.yml build
 
     $ docker-compose -f local.yml up
 

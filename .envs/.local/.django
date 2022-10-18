@@ -15,5 +15,5 @@ CELERY_FLOWER_PASSWORD=G5vygI5sw9ZVi5kgllPxt6LNwerjojOtVJzYUpZiMQAJixnlqSzAY7mZW
 
 # HTTPS
 # ------------------------------------------------------------------------------
-VIRTUAL_HOST=study.local
+VIRTUAL_HOST=gekacademy.local
 VIRTUAL_PORT=8000

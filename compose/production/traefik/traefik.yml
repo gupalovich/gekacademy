@@ -31,7 +31,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: "Host(`study.local`) || Host(`www.study.local`)"
+      rule: "Host(`gekacademy.com`) || Host(`www.gekacademy.com`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -42,7 +42,7 @@ http:
         certResolver: letsencrypt
 
     flower-secure-router:
-      rule: "Host(`study.local`)"
+      rule: "Host(`gekacademy.com`)"
       entryPoints:
         - flower
       service: flower

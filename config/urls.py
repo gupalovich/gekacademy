@@ -15,10 +15,10 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    path("users/", include("study.users.urls", namespace="users")),
+    path("users/", include("gekacademy.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("learn/", include("study.lessons.urls", namespace="lessons")),
+    path("learn/", include("gekacademy.lessons.urls", namespace="lessons")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS

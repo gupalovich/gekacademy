@@ -1,6 +1,6 @@
 from django.urls import resolve, reverse
 
-from study.users.models import User
+from gekacademy.users.models import User
 
 
 def test_detail(user: User):

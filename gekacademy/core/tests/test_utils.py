@@ -2,7 +2,7 @@ import pytest
 
 from transliterate import translit
 
-from study.lessons.models import Course
+from gekacademy.lessons.models import Course
 from ..utils import (
     capitalize_str,
     capitalize_slug,

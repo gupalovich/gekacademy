@@ -27,7 +27,7 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "Study Science"
+project = "Gek Academy"
 copyright = """2022, Dmitry Gupalo"""
 author = "Dmitry Gupalo"
 

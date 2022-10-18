@@ -4,11 +4,11 @@ from django.utils.translation import gettext_lazy as _
 
 class LessonsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'study.lessons'
+    name = 'gekacademy.lessons'
     verbose_name = _('Lessons')
 
     def ready(self):
         try:
-            import study.lessons.signals  # noqa F401
+            import gekacademy.lessons.signals  # noqa F401
         except ImportError:
             pass

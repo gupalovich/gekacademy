@@ -1,7 +1,7 @@
 from django.test import RequestFactory
 
-from study.users.api.views import UserViewSet
-from study.users.models import User
+from gekacademy.users.api.views import UserViewSet
+from gekacademy.users.models import User
 
 
 class TestUserViewSet:
