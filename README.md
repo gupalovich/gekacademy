@@ -23,7 +23,7 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
 ## API
 
-Для репрезентации используется OpenApi - Swagger генерация
+![image](https://i.postimg.cc/P5QhcF71/gekacademy-api.png)
 
 ### Type checks
 
