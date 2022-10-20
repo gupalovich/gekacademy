@@ -1,11 +1,11 @@
 # Gek Academy    [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 
-![image](https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Gekko_gecko_%2835838165973%29.jpg/1024px-Gekko_gecko_%2835838165973%29.jpg)
-
 > Интерактивная платформа по обучению математических наук, подобие duolingo.
 > Важно достигнуть эффекта 'игры' и соперничества, а также мотивации, по средству разных психологических подходов в обучении.
 
 > Версия: 0.3.0
+
+![image](https://i.postimg.cc/nc9f2m3q/gekko.jpg)
 
 #### Цели: 
 
@@ -19,7 +19,7 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
 ## Модели
 
-TODO
+![image](https://i.postimg.cc/TYnWKCZs/gekacademy-models.png)
 
 ## API
 
