@@ -278,3 +278,4 @@ gekacademy/media/
 .env
 .envs/*
 !.envs/.local/
+math.txt
