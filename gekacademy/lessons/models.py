@@ -141,7 +141,11 @@ class Achievement(models.Model):
         editable=False)
     name = models.CharField(_('Name'), max_length=255)
     description = models.TextField(_('Description'), blank=True, default='')
-    badge = models.ImageField(_('Badge'), blank=True, default='', upload_to='badges/')
+    badge = models.ImageField(
+        _('Badge'),
+        blank=True,
+        default='badges/default.png',
+        upload_to='badges/')
 
     class Meta:
         verbose_name = _('Achievement')

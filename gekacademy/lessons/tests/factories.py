@@ -2,7 +2,7 @@ from factory import SubFactory, Faker
 from factory.fuzzy import FuzzyChoice
 from factory.django import DjangoModelFactory
 
-from ..models import Course, Lesson, Exercise
+from ..models import Course, Lesson, Exercise, Achievement
 
 
 class CourseFactory(DjangoModelFactory):
@@ -33,3 +33,12 @@ class ExerciseFactory(DjangoModelFactory):
     class Meta:
         model = Exercise
         # django_get_or_create = ['title']
+
+
+class AchievementFactory(DjangoModelFactory):
+    name = Faker('sentence', nb_words=4, locale='ru_RU')
+    description = Faker('text', locale='ru_RU')
+
+    class Meta:
+        model = Achievement
+        django_get_or_create = ['name']

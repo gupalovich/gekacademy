@@ -4,8 +4,8 @@ from transliterate import translit
 from django.test import TestCase
 from django.utils.text import slugify
 
-from ..models import Course, Lesson, Exercise
-from .factories import CourseFactory, LessonFactory, ExerciseFactory
+from ..models import Course, Lesson, Exercise, Achievement
+from .factories import CourseFactory, LessonFactory, ExerciseFactory, AchievementFactory
 
 
 class CourseTests(TestCase):
@@ -109,3 +109,9 @@ class ExerciseTests(TestCase):
             assert obj.lesson
             assert obj.lesson.course
             assert isinstance(obj.difficulty, int)
+
+
+class AchievementTests(TestCase):
+    def setUp(self):
+        self.batch_size = 10
+        self.achievements = AchievementFactory.create_batch(size=self.batch_size)
