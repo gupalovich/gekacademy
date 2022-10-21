@@ -151,5 +151,8 @@ class Achievement(models.Model):
         verbose_name = _('Achievement')
         verbose_name_plural = _('Achievements')
 
+    def __str__(self):
+        return self.name
+
     def save(self, *args, **kwargs):
         return super().save(*args, **kwargs)

@@ -114,4 +114,32 @@ class ExerciseTests(TestCase):
 class AchievementTests(TestCase):
     def setUp(self):
         self.batch_size = 10
+        self.default_badge = 'badges/default.png'
         self.achievements = AchievementFactory.create_batch(size=self.batch_size)
+
+    def test_create(self):
+        assert len(self.achievements) == self.batch_size
+
+    def test_update(self):
+        new_name = 'new title'
+        new_description = 'lorem ipsum'
+        for obj in self.achievements:
+            obj.name = new_name
+            obj.description = new_description
+            obj.save()
+        for obj in self.achievements:
+            assert obj.name == new_name
+            assert obj.description == new_description
+
+    def test_delete(self):
+        for obj in self.achievements:
+            obj.delete()
+        achievements = Achievement.objects.all()
+        assert not len(achievements)
+
+    def test_fields(self):
+        for obj in self.achievements:
+            assert obj.uuid
+            assert obj.name
+            assert obj.description
+            assert obj.badge == self.default_badge
