@@ -1,5 +1,6 @@
 import uuid as uuid_lib
 
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -114,6 +115,10 @@ class Exercise(TimeStampedModel):
         _('Difficulty'),
         choices=DIFFICULTY,
         default=DIFFICULTY[0])
+    condition = models.TextField(_('Condition'), default='')
+    expression = models.CharField(max_length=255, blank=True, default='')
+    answer = models.CharField(max_length=55, default='')
+    answers = ArrayField(models.CharField(max_length=55), blank=True, default=list)
 
     class Meta:
         verbose_name = _('Exercise')
