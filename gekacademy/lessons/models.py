@@ -71,6 +71,7 @@ class Lesson(TimeStampedModel):
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(max_length=128, unique=True)
     theory = models.TextField(_('Theory'), blank=True, default='')
+    premium = models.BooleanField(_('Premium'), default=False)
     status = StatusField()
     tracker = FieldTracker(fields=['title'])
 
@@ -113,7 +114,6 @@ class Exercise(TimeStampedModel):
         _('Difficulty'),
         choices=DIFFICULTY,
         default=DIFFICULTY[0])
-    premium = models.BooleanField(_('Premium'), default=False)
 
     class Meta:
         verbose_name = _('Exercise')
@@ -131,13 +131,3 @@ class Exercise(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         return super().save(*args, **kwargs)
-
-
-class ExerciseAnswer(TimeStampedModel):
-    """Ответы на задачу"""
-    pass
-
-
-class ExerciseQuestion(TimeStampedModel):
-    """Контрольный вопрос"""
-    pass
