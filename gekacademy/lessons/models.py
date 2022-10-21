@@ -131,3 +131,21 @@ class Exercise(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         return super().save(*args, **kwargs)
+
+
+class Achievement(models.Model):
+    # fields
+    uuid = models.UUIDField(
+        db_index=True,
+        default=uuid_lib.uuid4,
+        editable=False)
+    name = models.CharField(_('Name'), max_length=255)
+    description = models.TextField(_('Description'), blank=True, default='')
+    badge = models.ImageField(_('Badge'), blank=True, default='', upload_to='badges/')
+
+    class Meta:
+        verbose_name = _('Achievement')
+        verbose_name_plural = _('Achievements')
+
+    def save(self, *args, **kwargs):
+        return super().save(*args, **kwargs)
