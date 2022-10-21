@@ -29,6 +29,10 @@ class LessonFactory(DjangoModelFactory):
 class ExerciseFactory(DjangoModelFactory):
     lesson = SubFactory(LessonFactory)
     difficulty = FuzzyChoice(choices=[i for i in range(10)])
+    condition = Faker('sentence', nb_words=4, locale='ru_RU')
+    expression = '1 + 1'
+    answer = '2'
+    answers = ['2', '3', '5']
 
     class Meta:
         model = Exercise

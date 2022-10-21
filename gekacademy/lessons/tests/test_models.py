@@ -73,6 +73,7 @@ class LessonTests(TestCase):
             assert obj.course.slug
             assert len(obj.title) >= 3
             assert len(obj.theory) >= 5
+            assert obj.experience == 10
             assert slugify(translit(obj.title, 'ru', reversed=True)) == obj.slug
             assert obj.status == 'draft' or obj.status == 'published'
 
@@ -109,6 +110,9 @@ class ExerciseTests(TestCase):
             assert obj.lesson
             assert obj.lesson.course
             assert isinstance(obj.difficulty, int)
+            assert obj.expression
+            assert obj.answer
+            assert isinstance(obj.answers, list)
 
 
 class AchievementTests(TestCase):

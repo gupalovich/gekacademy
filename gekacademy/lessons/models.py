@@ -72,6 +72,7 @@ class Lesson(TimeStampedModel):
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(max_length=128, unique=True)
     theory = models.TextField(_('Theory'), blank=True, default='')
+    experience = models.IntegerField(_('Experience'), default=10)
     premium = models.BooleanField(_('Premium'), default=False)
     status = StatusField()
     tracker = FieldTracker(fields=['title'])
