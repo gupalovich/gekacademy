@@ -17,6 +17,12 @@
 
 Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
 
+## Commit коды
+
+    A1 - App core
+    A2 - App users
+    A3 - App lessons
+
 ## Модели
 
 ![image](https://i.postimg.cc/TYnWKCZs/gekacademy-models.png)
