@@ -154,5 +154,8 @@ class Achievement(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('lessons:achievement', kwargs={'uuid', self.uuid})
+
     def save(self, *args, **kwargs):
         return super().save(*args, **kwargs)

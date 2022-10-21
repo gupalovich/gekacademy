@@ -2,8 +2,13 @@ import pytest
 
 from gekacademy.users.models import User
 from gekacademy.users.tests.factories import UserFactory
-from gekacademy.lessons.models import Course, Lesson, Exercise
-from gekacademy.lessons.tests.factories import CourseFactory, LessonFactory, ExerciseFactory
+from gekacademy.lessons.models import Course, Lesson, Exercise, Achievement
+from gekacademy.lessons.tests.factories import (
+    CourseFactory,
+    LessonFactory,
+    ExerciseFactory,
+    AchievementFactory,
+)
 
 
 @pytest.fixture(autouse=True)
@@ -44,3 +49,8 @@ def exercise(db) -> Exercise:
 @pytest.fixture
 def exercise_ten(db) -> list[Exercise]:
     return ExerciseFactory.create_batch(size=10)
+
+
+@pytest.fixture
+def achievement(db) -> Achievement:
+    return AchievementFactory()

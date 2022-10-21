@@ -1,6 +1,6 @@
 from django.urls import resolve, reverse
 
-from ..models import Course, Lesson, Exercise
+from ..models import Course, Lesson, Exercise, Achievement
 
 
 url_prefix = '/learn'
@@ -37,3 +37,10 @@ def test_exercise(exercise: Exercise):
         })
     assert rev == url
     assert resolve(url).view_name == 'lessons:exercise'
+
+
+def test_achievement_list(achievement: Achievement):
+    url = '%s/achievements/' % url_prefix
+    rev = reverse('lessons:achievement-list')
+    assert rev == url
+    assert resolve(url).view_name == 'lessons:achievement-list'
