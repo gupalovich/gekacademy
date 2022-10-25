@@ -145,4 +145,5 @@ See detailed [cookiecutter-django Docker documentation](http://cookiecutter-djan
 #### Bash
 
     $ docker-compose -f local.yml run django bash
+    $ docker-compose -f local.yml exec django bash
     $ exit
