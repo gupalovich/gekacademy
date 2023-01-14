@@ -1,4 +1,4 @@
-# Gek Academy    [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
+# Gek Academy [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 
 > Интерактивная платформа по обучению математических наук, подобие duolingo.
 > Важно достигнуть эффекта 'игры' и соперничества, а также мотивации, по средству разных психологических подходов в обучении.
@@ -7,7 +7,7 @@
 
 ![image](https://i.postimg.cc/nc9f2m3q/gekko.jpg)
 
-#### Цели: 
+#### Цели:
 
 - Восстановление навыков django, django-orm, drf
 - Восстановление навыков javascript (reactjs)
@@ -50,17 +50,17 @@ Running type checks with mypy:
     $ pytest
     $ pytest -s (with i/o logging)
 
-Тест отдельного модуля    
+Тест отдельного модуля
 
     $ pytest /tests/test_models.py
-    
+
 Тест только с декоратором `@pytest.mark.slow`
 
     $ pytest -v -m slow
 
 Инверсия предыдущей команды - исключить тесты с декоратором `@pytest.mark.slow`)
-    
-    $ pytest -v -m "not slow" 
+
+    $ pytest -v -m "not slow"
 
 ### Celery
 
@@ -72,7 +72,7 @@ Running type checks with mypy:
 
 ### Email Server
 
-В разработке используется эмуляция  smtp сервера [MailHog](https://github.com/mailhog/MailHog) с интерфейсом докер контейнера.
+В разработке используется эмуляция smtp сервера [MailHog](https://github.com/mailhog/MailHog) с интерфейсом докер контейнера.
 
 Контейнер mailhog-а стартует автоматически со всеми остальными контейнерами.
 
@@ -86,6 +86,7 @@ The system is set up with reasonable defaults, including 404 logging and integra
 You must set the DSN url in production.
 
 ## HTTPS
+
 Сертификаты и ключи хранятся в `certs/*`
 
 #### Генерации локального сертификата (не подтвержденного)
@@ -97,13 +98,13 @@ You must set the DSN url in production.
 #### Установить [chocolatey](https://chocolatey.org/install)
 
     $ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-    
-    $ choco 
+
+    $ choco
 
 #### Установить [mkcert](https://github.com/FiloSottile/mkcert)
 
     $ choco install mkcert
-    
+
     $ mkcert -install
     $ mkcert -key-file gekacademy.local.key -cert-file gekacademy.local.crt localhost 127.0.0.1 ::1 gekacademy.local
 
@@ -112,7 +113,6 @@ You must set the DSN url in production.
      127.0.0.1 .gekacademy.local
 
 ### [Инструкции по подключению сертификата c docker](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html#developing-locally-with-https)
-    
 
 ## Deployment
 
